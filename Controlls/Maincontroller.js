@@ -1,7 +1,7 @@
 const nodemailer = require("nodemailer");
 const adminmodel = require('../Models/adminmodel');
 const Blogmodel = require("../Models/Blogmodel");
-const typemodel = require('../Models/typemodel');
+// const typemodel = require('../Models/typemodel');
 
 const bcrypt = require('bcrypt');
 const otpGenerator = require('otp-generator');
@@ -197,6 +197,16 @@ const tablecontroller = async (req, res) => {
 //         res.status(500).send('Internal Server Error');
 //     }
 // };
+const deletecontroller=async(req,res) => {   
+    let {id} =req.params;
+    let deletemv=await Blogmodel.findOne({_id:id});
+    console.log("delete movie",deletemv);
+
+
+    await Blogmodel.deleteOne({_id: id});
+    res.redirect('/table');
+
+};
 
 const useraddcontroller =async (req, res) => {
 
@@ -216,9 +226,10 @@ const useraddcontroller =async (req, res) => {
             usere: req.user.id
 
         })
+        console.log("blogssss",blog);
         await blog.save();
 
-        res.redirect('/table');
+        // res.redirect('/table');
     } else {
 
         let updatebook = await Blogmodel.updateOne({_id:editid},{
@@ -226,7 +237,7 @@ const useraddcontroller =async (req, res) => {
             Des:req.body.Des,
             Rating:req.body.Rating,
             Author:req.body.Author,
-            usere: req.user.id
+            // usere: req.user.id
 
         })
 
@@ -259,6 +270,7 @@ const myprofilecontroller = async (req, res) => {
         res.redirect('/signin');
     }
 };
+
 
 const editcontroller = async (req, res) => {
     try {
@@ -432,30 +444,4 @@ const newpass = async (req, res) => {
 
 };
 
-const typeform = async (req, res) => {
-    try {
-        // Fetch data from the database
-        const types = await typemodel.find({}, 'value label');
-
-        // Render the form template with the data
-        res.render('form', { types }); // Assuming the template name is 'form.ejs'
-    } catch (error) {
-        console.error('Error fetching data from database:', error);
-        res.status(500).send('Error fetching data from database');
-    }
-}
-
-const typesendcontroller = async (req, res) => {
-    try {
-        const { type } = req.body;
-        const newType = new typemodel({ type });
-        await newType.save();
-        console.log('Data added successfully!');
-        res.send('Data added successfully!');
-    } catch (error) {
-        console.error('Error adding data to the database:', error);
-        res.status(500).send('Error adding data to the database');
-    }
-}
-
-module.exports = { defaultController, signincontroller, signupcontrooler, adminregcontroller, loginadmincontroller, logoutadmincontroller, formcontroller, useraddcontroller, myprofilecontroller, editcontroller, editprofilecontroller, changepasswordcontroller, changepassword, tablecontroller, usere, forgetpass, finduser, otpvalidation, submitotp, resetpassword, newpass,editblogcontroller,typeform,typesendcontroller };
+module.exports = { defaultController, signincontroller, signupcontrooler, adminregcontroller, loginadmincontroller, logoutadmincontroller, formcontroller, useraddcontroller, myprofilecontroller, editcontroller, editprofilecontroller, changepasswordcontroller, changepassword, tablecontroller, usere, forgetpass, finduser, otpvalidation, submitotp, resetpassword, newpass,editblogcontroller,deletecontroller };

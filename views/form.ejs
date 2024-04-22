@@ -405,7 +405,7 @@
                     <div class="card-body">
                     
                       <form action="/useradd" method="post">
-         <div class="row mb-3">
+        <div class="row mb-3">
       <label class="col-sm-2 col-form-label" for="basic-icon-default-fullname">Title</label>
       <div class="col-sm-10">
           <input type="text" name="Title" class="form-control" id="basic-icon-default-fullname">
@@ -428,18 +428,6 @@
     <div class="col-sm-10">
         <input type="text" name="Author" class="form-control" id="basic-icon-default-email">
     </div>
-    div class="row mb-3">
-    <label class="col-sm-2 col-form-label" for="type">Type</label>
-    <div class="col-sm-10">
-        <select name="type" class="form-control" id="type">
-            <% if (types && types.length > 0) { %>
-                <% types.forEach(type => { %>
-                    <option value="<%= type.value %>"><%= type.label %></option>
-                <% }); %>
-            <% } %>
-        </select>
-    </div>
-</div>
 </div>
   <div class="row justify-content-end">
       <div class="col-sm-10">

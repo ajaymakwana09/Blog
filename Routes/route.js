@@ -19,6 +19,7 @@ routes.get('/logoutadmin', controller.logoutadmincontroller);
 routes.get('/form', controller.formcontroller);
 
 routes.post('/useradd', controller.useraddcontroller);
+routes.get('/deletecontroller/:id',controller.deletecontroller);
 
 routes.get('/editblogcontroller/:id',controller.editblogcontroller);
 
@@ -46,9 +47,6 @@ routes.get('/resetpassword', controller.resetpassword);
 
 routes.post('/newpass', controller.newpass);
 
-routes.get('/typeform', controller.typeform); // Route to render the form
-
-routes.post('/typeform', controller.typesendcontroller);
 
 
 
